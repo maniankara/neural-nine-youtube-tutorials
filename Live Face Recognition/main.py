@@ -3,14 +3,16 @@ import threading
 import cv2
 from deepface import DeepFace
 
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+IMAGE="./monastry.jpg"
+
+cap = cv2.VideoCapture(0)
 
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 counter = 0
 
-reference_img = cv2.imread("reference.jpg")  # use your own image here
+reference_img = cv2.imread(IMAGE)  # use your own image here
 
 face_match = False
 
@@ -26,7 +28,7 @@ def check_face(frame):
         face_match = False
 
 
-while True:
+while cap.isOpened():
     ret, frame = cap.read()
 
     if ret:
